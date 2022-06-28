@@ -1,0 +1,60 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+                integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Merriweather&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&family=Roboto:wght@100&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/profile.css">
+        <!-- <link rel="stylesheet" href="../public/css/home.css"> -->
+    </head>
+<body>
+    <div class="header">
+        <h1>Image Gallery</h1>
+    </div>
+    <div class="img-form">
+        <h2>Welcome <%=name%></h2>
+        <form action="http://localhost:3000/user/<%=id%>"+ method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="image">Upload Image</label>
+                <input type="file" id="image" 
+                       name="image" value="" required>
+            </div>
+                <button type="submit">Submit</button>
+        </form>
+    </div>
+    <h1 class="img-header">Uploaded Images</h1>
+    <div class="img-gallery">
+        <% images.forEach(function(image) { %>
+            <ul>
+                <li>
+                <img src="data:image/<%=image.contentType%>;base64,
+                     <%=image.data.toString('base64')%>">
+                </li>
+            </ul>
+        <% }) %>
+    </div>
+    <div class="gallery">
+        <i class="fa-solid fa-xmark close"></i>
+        <div class="gallery__inner">
+            <img src="" alt="">
+        </div>
+        <div class="control prev">
+            <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        <div class="control next">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </div>
+    <script src="/profile.js"></script>
+</body>
+</html>
