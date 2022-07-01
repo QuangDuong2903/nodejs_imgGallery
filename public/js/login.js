@@ -9,7 +9,6 @@ form.addEventListener('submit', function(e) {
 
 btn.addEventListener('click', function() {
     let url = new URL(window.location.protocol + '//' + window.location.host + '/login')
-    console.log(url);
     url.searchParams.append('username', username.value);
     url.searchParams.append('password', password.value);
     fetch(url)
