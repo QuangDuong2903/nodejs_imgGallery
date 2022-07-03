@@ -1,8 +1,20 @@
-const express = require('express');
-var router = express.Router();
+const express = require('express')
+
+const jwt = require('jsonwebtoken')
+
+const router = express.Router()
+
+const path = require('path')
+
+
+
 const AccountModel = require('../models/account')
 
 router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname.substring(0, __dirname.length - 7), 'views/login.html'));
+})
+
+router.post('/', (req, res) => {
     AccountModel.findOne({
         username: req.query.username
     })
@@ -10,7 +22,10 @@ router.get('/', (req, res) => {
         if(data)
         {
             if(data.password == req.query.password)
-                res.json({src: data._id})
+            {
+                var token = jwt.sign({ _id: data._id }, 'qd')
+                res.json({src: data._id, token: token})
+            }
             else
                 res.json({message:'Sai mật khẩu'})
         }

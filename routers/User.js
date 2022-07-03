@@ -1,8 +1,24 @@
 const express = require('express')
+
+const jwt = require('jsonwebtoken')
+
 var router = express.Router()
+
 const AccountModel = require('../models/account')
 
-router.get('/:id', (req, res) => {
+const cookieParser = require('cookie-parser')
+
+router.use(cookieParser())
+
+router.get('/:id', (req, res, next) => {
+    try {
+        var rs = jwt.verify(req.cookies.token, 'qd')
+        if(rs)
+          next()
+    } catch (error) {
+        res.redirect('/login')
+    } 
+}, (req, res) => {
     AccountModel.findById(req.params.id)
     .then(data => {
         res.render('profile', {id: data._id, name: data.username, images: data.imgArray})

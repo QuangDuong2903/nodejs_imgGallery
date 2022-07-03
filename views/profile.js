@@ -10,8 +10,6 @@ const close = document.querySelector('.close');
 
 var galleryImg = document.querySelector('.gallery__inner img');
 
-console.log(images)
-
 var imgIndex = 0;
 
 images.forEach((image, index) => {
