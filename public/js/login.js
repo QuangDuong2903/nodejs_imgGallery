@@ -51,5 +51,5 @@ btn.addEventListener('click', function() {
         }
         if(data.message)
             alert(data.message)
-    });
+    })
 })
